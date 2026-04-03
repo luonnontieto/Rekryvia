@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RekryVia</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* Grundinställningar */
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Roboto', sans-serif; color:#333; }
+
+/* Länkar */
+a { text-decoration:none; color:inherit; cursor:pointer; }
+
+/* Header med logga centrerad och meny under */
+header {
+    text-align:center;
+    padding:20px 0;
+    background:#fff;
+    border-bottom:1px solid #e0e0e0;
+}
+
+header .logo img {
+    width:80px;
+    height:auto;
+    display:block;
+    margin:0 auto;
+}
+
+header .logo-text {
+    font-weight:700;
+    font-size:24px;
+    margin-top:10px;
+}
+
+nav ul {
+    list-style:none;
+    display:flex;
+    justify-content:center;
+    gap:30px;
+    font-weight:500;
+    padding:15px 0 0 0;
+    align-items:center;
+}
+
+nav ul li a {
+    color:#333;
+    font-weight:500;
+    position: relative;
+    padding:5px 10px;
+}
+
+nav ul li a:hover {
+    border-bottom:2px solid #8b5e3c;
+}
+
+/* Dropdown för språk */
+nav ul li.dropdown {
+    position: relative;
+}
+
+nav ul li .dropbtn {
+    cursor: pointer;
+    display: inline-block;
+    padding:5px 10px;
+    font-weight:500;
+}
+
+/* Dropdown content */
+nav ul li .dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    background-color: #fff;
+    min-width: 120px;
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+    z-index: 100;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+nav ul li .dropdown-content a {
+    display: block;
+    padding: 10px 15px;
+    color: #333;
+    font-weight:500;
+    text-align: left;
+}
+
+nav ul li .dropdown-content a:hover {
+    background-color: #f0e6db;
+}
+
+/* Visa dropdown vid hover */
+nav ul li.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Sektioner (undersidor) med extra utrymme */
+section {
+    position: relative;
+    width: 100%;
+    min-height: calc(100vh - 140px);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    text-align: center;
+    color: #fff;
+    background: url('hero.jpg') center/cover no-repeat;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.6s ease;
+    padding-top: 60px;
+    padding-bottom: 100px;
+}
+
+section.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+section::after {
+    content:"";
+    position:absolute;
+    top:0; left:0;
+    width:100%; height:100%;
+    background-color:rgba(0,0,0,0.5);
+    z-index:0;
+}
+
+.section-content {
+    position: relative;
+    z-index: 1;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+h1 { font-size:2.5rem; margin-bottom:20px; }
+p { font-size:1rem; margin-bottom:30px; line-height:1.6; }
+button { background-color:#c49b7c; border:none; padding:12px 30px; font-size:1rem; color:#fff; border-radius:8px; cursor:pointer; transition:background 0.3s; }
+button:hover { background-color:#a0785f; }
+
+@media (max-width:768px) {
+    nav ul { gap:15px; flex-wrap:wrap; justify-content:center;}
+    h1 { font-size:2rem; }
+    p { font-size:0.9rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header>
+    <div class="logo">
+        <img src="81f6697a-89ab-40b6-91d6-aba877d9928a.png" alt="RekryVia Logo">
+        <div class="logo-text">RekryVia</div>
+    </div>
+    <nav>
+        <ul>
+            <li><a data-page="home">Hem</a></li>
+            <li><a data-page="about">Om oss</a></li>
+            <li><a data-page="services">Tjänster</a></li>
+            <li><a data-page="references">Kundreferenser</a></li>
+            <li><a data-page="team">Team</a></li>
+            <li><a data-page="contact">Kontakt</a></li>
+            <li class="dropdown">
+                <a class="dropbtn">Språk ▼</a>
+                <div class="dropdown-content">
+                    <a data-lang="sv">Svenska</a>
+                    <a data-lang="fi">Finska</a>
+                    <a data-lang="en">English</a>
+                </div>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+<!-- Sektionsinnehåll -->
+<section id="home" class="active">
+    <div class="section-content">
+        <h1 data-key="home_title">Maximera ditt företags potential med våra skräddarsydda konsulttjänster.</h1>
+        <p data-key="home_text">Välkommen till vårt konsultföretag som specialiserar sig på coachning för att hjälpa våra kunder att nå sina mål.</p>
+        <button data-key="contact_button">Kontakta oss</button>
+    </div>
+</section>
+
+<section id="about">
+    <div class="section-content">
+        <h1 data-key="about_title">Om oss</h1>
+        <p data-key="about_text">Vi är ett konsultföretag som värdesätter personlig utveckling och framgång. Lär känna vår historia, våra värderingar och vårt team.</p>
+        <button data-key="contact_button">Kontakta oss</button>
+    </div>
+</section>
+
+<section id="services">
+    <div class="section-content">
+        <h1 data-key="services_title">Tjänster</h1>
+        <p data-key="services_text">Vi erbjuder skräddarsydda konsulttjänster och coachning som hjälper ditt företag att växa och utvecklas.</p>
+        <button data-key="contact_button">Kontakta oss</button>
+    </div>
+</section>
+
+<section id="references">
+    <div class="section-content">
+        <h1 data-key="references_title">Kundreferenser</h1>
+        <p data-key="references_text">Ta del av våra tidigare projekt och se vad våra kunder säger om oss.</p>
+        <button data-key="contact_button">Kontakta oss</button>
+    </div>
+</section>
+
+<section id="team">
+    <div class="section-content">
+        <h1 data-key="team_title">Team</h1>
+        <p data-key="team_text">Möt vårt team av experter inom coachning och konsulttjänster.</p>
+        <button data-key="contact_button">Kontakta oss</button>
+    </div>
+</section>
+
+<section id="contact">
+    <div class="section-content">
+        <h1 data-key="contact_title">Kontakt</h1>
+        <p data-key="contact_text">Här kan du nå oss direkt för frågor eller boka en konsultation.</p>
+        <button data-key="send_message_button">Skicka meddelande</button>
+    </div>
+</section>
+
+<script>
+// Sektioner
+const links = document.querySelectorAll('nav a[data-page]');
+const sections = document.querySelectorAll('section');
+
+// Språkdata
+const translations = {
+    sv: { home: "Hem", about: "Om oss", services: "Tjänster", references: "Kundreferenser", team: "Team", contact: "Kontakt",
+          home_title: "Maximera ditt företags potential med våra skräddarsydda konsulttjänster.",
+          home_text: "Välkommen till vårt konsultföretag som specialiserar sig på coachning för att hjälpa våra kunder att nå sina mål.",
+          about_title: "Om oss", about_text: "Vi är ett konsultföretag som värdesätter personlig utveckling och framgång. Lär känna vår historia, våra värderingar och vårt team.",
+          services_title: "Tjänster", services_text: "Vi erbjuder skräddarsydda konsulttjänster och coachning som hjälper ditt företag att växa och utvecklas.",
+          references_title: "Kundreferenser", references_text: "Ta del av våra tidigare projekt och se vad våra kunder säger om oss.",
+          team_title: "Team", team_text: "Möt vårt team av experter inom coachning och konsulttjänster.",
+          contact_title: "Kontakt", contact_text: "Här kan du nå oss direkt för frågor eller boka en konsultation.",
+          contact_button: "Kontakta oss", send_message_button: "Skicka meddelande"
+    },
+    fi: { home: "Koti", about: "Meistä", services: "Palvelut", references: "Asiakaskokemukset", team: "Tiimi", contact: "Yhteystiedot",
+          home_title: "Maksimoi yrityksesi potentiaali räätälöidyillä konsulttipalveluillamme.",
+          home_text: "Tervetuloa konsulttiyritykseemme, joka erikoistuu coachingiin auttaakseen asiakkaitamme saavuttamaan tavoitteensa.",
+          about_title: "Meistä", about_text: "Olemme konsulttiyritys, joka arvostaa henkilökohtaista kehitystä ja menestystä. Tutustu tarinaamme, arvoihimme ja tiimiimme.",
+          services_title: "Palvelut", services_text: "Tarjoamme räätälöityjä konsulttipalveluita ja coachingia, jotka auttavat yritystäsi kasvamaan ja kehittymään.",
+          references_title: "Asiakaskokemukset", references_text: "Tutustu aiempiin projekteihimme ja katso, mitä asiakkaamme sanovat meistä.",
+          team_title: "Tiimi", team_text: "Tapaa asiantuntijatiimimme coachingin ja konsulttipalveluiden alalla.",
+          contact_title: "Yhteystiedot", contact_text: "Täältä voit ottaa meihin suoraan yhteyttä kysymyksissä tai varata konsultoinnin.",
+          contact_button: "Ota yhteyttä", send_message_button: "Lähetä viesti"
+    },
+    en: { home: "Home", about: "About Us", services: "Services", references: "References", team: "Team", contact: "Contact",
+          home_title: "Maximize your company's potential with our tailored consulting services.",
+          home_text: "Welcome to our consulting company specializing in coaching to help our clients achieve their goals.",
+          about_title: "About Us", about_text: "We are a consulting company that values personal development and success. Learn about our history, values, and team.",
+          services_title: "Services", services_text: "We offer tailored consulting services and coaching to help your business grow and succeed.",
+          references_title: "References", references_text: "Check out our previous projects and see what our clients say about us.",
+          team_title: "Team", team_text: "Meet our team of experts in coaching and consulting services.",
+          contact_title: "Contact", contact_text: "Here you can reach us directly for questions or book a consultation.",
+          contact_button: "Contact Us", send_message_button: "Send Message"
+    }
+};
+
+// Byt sektioner
+links.forEach(link => {
+    link.addEventListener('click', () => {
+        const targetId = link.getAttribute('data-page');
+        sections.forEach(sec => {
+            sec.classList.toggle('active', sec.id === targetId);
+        });
+    });
+});
+
+// Byt språk
+const langLinks = document.querySelectorAll('.dropdown-content a');
+langLinks.forEach(link => {
+    link.addEventListener('click', () => {
+        const lang = link.getAttribute('data-lang');
+        // Ändra meny
+        links.forEach(l => {
+            const key = l.getAttribute('data-page');
+            l.textContent = translations[lang][key];
+        });
+        // Ändra sektioner
+        const textElements = document.querySelectorAll('[data-key]');
+        textElements.forEach(el => {
+            const key = el.getAttribute('data-key');
+            el.textContent = translations[lang][key];
+        });
+    });
+});
+</script>
+
+</body>
+</html>
