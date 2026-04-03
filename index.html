@@ -17,7 +17,7 @@ a { text-decoration:none; color:inherit; cursor:pointer; }
 /* Header med logga centrerad och meny under */
 header {
     text-align:center;
-    padding: 10px 0 0 0; /* mindre padding under loggan */
+    padding:5px 0 0 0; /* mindre padding ovanför loggan */
     background:#fff;
     border-bottom:1px solid #e0e0e0;
     position: fixed;
@@ -32,7 +32,7 @@ header .logo img {
     width:320px; /* 4x större */
     height:auto;
     display:block;
-    margin:0 auto 2px auto; /* lägg till liten margin-bottom, t.ex. 2px */
+    margin:0 auto 0px auto; /* ingen margin-bottom alls, sitter nära menyn */
 }
 
 /* Meny */
@@ -42,7 +42,7 @@ nav ul {
     justify-content:center;
     gap:30px;
     font-weight:500;
-    padding:2px 0 0 0; /* padding-top nästan noll */
+    padding:0; /* padding-top helt borttagen */
     align-items:center;
     flex-wrap:wrap;
 }
@@ -278,7 +278,7 @@ const translations = {
           home_title: "Maximera ditt företags potential med våra skräddarsydda konsulttjänster.",
           home_text: "Välkommen till vårt konsultföretag som specialiserar sig på coachning för att hjälpa våra kunder att nå sina mål.",
           about_title: "Om oss", about_text: "Vi är ett konsultföretag som värdesätter personlig utveckling och framgång. Lär känna vår historia, våra värderingar och vårt team.",
-          services_title: "Tjänster", services_text: "Vi erbjuder skräddarsydda konsulttjänster och coachning som hjälper ditt företag att växa och utvecklas.",
+          services_title: "Tjänster", services_text: "Vi erbjuder skräddarsydda konsulttipalveluita och coachning som hjälper ditt företag att växa och utvecklas.",
           references_title: "Kundreferenser", references_text: "Ta del av våra tidigare projekt och se vad våra kunder säger om oss.",
           team_title: "Team", team_text: "Möt vårt team av experter inom coachning och konsulttjänster.",
           contact_title: "Kontakt", contact_text: "Här kan du nå oss direkt för frågor eller boka en konsultation.",
