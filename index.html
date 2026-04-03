@@ -5,10 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>RekryVia</title>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
 <style>
 /* Grundinställningar */
 * { margin:0; padding:0; box-sizing:border-box; }
-body { font-family:'Roboto', sans-serif; color:#333; }
+body { font-family:'Roboto', sans-serif; color:#333; overflow:hidden; }
 
 /* Länkar */
 a { text-decoration:none; color:inherit; cursor:pointer; }
@@ -16,11 +17,17 @@ a { text-decoration:none; color:inherit; cursor:pointer; }
 /* Header med logga centrerad och meny under */
 header {
     text-align:center;
-    padding:20px 0;
+    padding:20px 0 15px 0;
     background:#fff;
     border-bottom:1px solid #e0e0e0;
+    position: fixed;
+    top:0;
+    left:0;
+    width:100%;
+    z-index:1000;
 }
 
+/* Logga */
 header .logo img {
     width:80px;
     height:auto;
@@ -34,14 +41,16 @@ header .logo-text {
     margin-top:10px;
 }
 
+/* Meny */
 nav ul {
     list-style:none;
     display:flex;
     justify-content:center;
     gap:30px;
     font-weight:500;
-    padding:15px 0 0 0;
+    padding:15px 0 10px 0; /* extra vitt utrymme under menyn */
     align-items:center;
+    flex-wrap:wrap;
 }
 
 nav ul li a {
@@ -98,27 +107,29 @@ nav ul li.dropdown:hover .dropdown-content {
     display: block;
 }
 
-/* Sektioner (undersidor) med extra utrymme */
+/* Sektioner */
 section {
-    position: relative;
-    width: 100%;
-    min-height: calc(100vh - 140px);
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    text-align: center;
-    color: #fff;
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+    text-align:center;
+    color:#fff;
     background: url('hero.jpg') center/cover no-repeat;
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.6s ease;
-    padding-top: 60px;
     padding-bottom: 100px;
 }
 
 section.active {
     opacity: 1;
     visibility: visible;
+    z-index: 1;
 }
 
 section::after {
@@ -135,28 +146,41 @@ section::after {
     z-index: 1;
     max-width: 800px;
     margin: 0 auto;
+    padding: 20px;
 }
 
 h1 { font-size:2.5rem; margin-bottom:20px; }
 p { font-size:1rem; margin-bottom:30px; line-height:1.6; }
-button { background-color:#c49b7c; border:none; padding:12px 30px; font-size:1rem; color:#fff; border-radius:8px; cursor:pointer; transition:background 0.3s; }
+
+button {
+    background-color:#c49b7c;
+    border:none;
+    padding:12px 30px;
+    font-size:1rem;
+    color:#fff;
+    border-radius:8px;
+    cursor:pointer;
+    transition:background 0.3s;
+}
 button:hover { background-color:#a0785f; }
 
 @media (max-width:768px) {
-    nav ul { gap:15px; flex-wrap:wrap; justify-content:center;}
+    nav ul { gap:15px; justify-content:center;}
     h1 { font-size:2rem; }
     p { font-size:0.9rem; }
 }
 </style>
 </head>
+
 <body>
 
 <!-- Header -->
-<header>
+<header id="siteHeader">
     <div class="logo">
         <img src="81f6697a-89ab-40b6-91d6-aba877d9928a.png" alt="RekryVia Logo">
         <div class="logo-text">RekryVia</div>
     </div>
+
     <nav>
         <ul>
             <li><a data-page="home">Hem</a></li>
@@ -230,6 +254,30 @@ button:hover { background-color:#a0785f; }
 // Sektioner
 const links = document.querySelectorAll('nav a[data-page]');
 const sections = document.querySelectorAll('section');
+const header = document.getElementById("siteHeader");
+
+// Funktion för att alltid sätta padding-top korrekt efter headerns höjd
+function updateSectionPadding() {
+    const headerHeight = header.offsetHeight;
+    sections.forEach(sec => {
+        sec.style.paddingTop = (headerHeight + 30) + "px"; 
+    });
+}
+
+// Kör direkt + vid resize
+updateSectionPadding();
+window.addEventListener("resize", updateSectionPadding);
+
+// Byt sektioner
+links.forEach(link => {
+    link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = link.getAttribute('data-page');
+
+        sections.forEach(sec => sec.classList.remove('active'));
+        document.getElementById(targetId).classList.add('active');
+    });
+});
 
 // Språkdata
 const translations = {
@@ -265,27 +313,17 @@ const translations = {
     }
 };
 
-// Byt sektioner
-links.forEach(link => {
-    link.addEventListener('click', () => {
-        const targetId = link.getAttribute('data-page');
-        sections.forEach(sec => {
-            sec.classList.toggle('active', sec.id === targetId);
-        });
-    });
-});
-
 // Byt språk
 const langLinks = document.querySelectorAll('.dropdown-content a');
 langLinks.forEach(link => {
     link.addEventListener('click', () => {
         const lang = link.getAttribute('data-lang');
-        // Ändra meny
+
         links.forEach(l => {
             const key = l.getAttribute('data-page');
             l.textContent = translations[lang][key];
         });
-        // Ändra sektioner
+
         const textElements = document.querySelectorAll('[data-key]');
         textElements.forEach(el => {
             const key = el.getAttribute('data-key');
